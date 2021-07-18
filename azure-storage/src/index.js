@@ -1,6 +1,8 @@
 const express = require("express");
 const azure = require('azure-storage');
+const http = require('http')
 const app = express();
+
 if (!process.env.PORT) {
     throw new Error("Please specify the port number for the HTTP server with the environment variable PORT.");
 }
@@ -29,7 +31,7 @@ app.get("/video", (req,res) => {
     const blobService = createBlobService();
     const containerName = "videos";
 
-    blobService.getBlobProperties(containerName, videoPath, (err,properties) => {
+    blobService.getBlobProperties(containerName, videoPath, (err, properties) => {
         if (err) {
             console.error(`Error occurred getting properties for video ${containerName}/${videoPath}.`);
             console.error(err && err.stack || err);
@@ -41,7 +43,7 @@ app.get("/video", (req,res) => {
             "Content-Type": "video/mp4",
         });
 
-        blobService.getBlobToStream(containerName, videoPath, res,err => {
+        blobService.getBlobToStream(containerName, videoPath, res, err => {
             if (err) {
                 console.error(`Error occurred getting video ${containerName}/${videoPath} to stream.`);
                 console.error(err && err.stack || err);
