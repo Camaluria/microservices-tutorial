@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const fs = require("fs");
-const port = 3000;
-// if (!process.env.PORT){
-//     throw new Error ("Missing PORT ENV in process.env!")
-// }
-// const port = process.env.port;
+//const port = 3000;
+if (!process.env.PORT){
+    throw new Error ("Missing PORT ENV in process.env!")
+}
+const port = process.env.PORT;
 
 app.get('/', (req,res) => {
     res.send('Hello World');
