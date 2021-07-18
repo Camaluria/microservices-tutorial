@@ -1,6 +1,5 @@
 const express = require("express");
 const azure = require('azure-storage');
-const http = require('http')
 const app = express();
 
 if (!process.env.PORT) {
